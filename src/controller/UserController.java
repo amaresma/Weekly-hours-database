@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  *
  * @author Albert
  */
-public class WeeklyHoursControler implements ActionListener{
+public class UserController implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {

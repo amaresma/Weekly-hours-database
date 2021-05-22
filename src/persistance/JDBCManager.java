@@ -6,20 +6,21 @@
 package persistance;
 
 import main.WeeklyHoursDatabaseException;
-import model.Day;
+import model.User;
 
 /**
  *
  * @author Albert
  */
-public class GestorJDBC implements PersistanceProvider {
+public class JDBCManager implements PersistanceProviderUser {
+    // SAVE THE DATA IN A JDBC
 
     @Override
-    public void saveDay(String user, Day day) throws WeeklyHoursDatabaseException {
+    public void save(String user, User userData) throws WeeklyHoursDatabaseException {
     }
 
     @Override
-    public void loadDay(String user) throws WeeklyHoursDatabaseException {
+    public void load(String user) throws WeeklyHoursDatabaseException {
     }
     
 }

@@ -6,13 +6,12 @@
 package persistance;
 
 import main.WeeklyHoursDatabaseException;
-import model.Day;
 
 /**
  *
  * @author Albert
  */
-public interface PersistanceProvider {
-    public void saveDay (String user, Day day) throws WeeklyHoursDatabaseException;
-    public void loadDay (String user) throws WeeklyHoursDatabaseException;
+public interface PersistanceProviderLogin {
+    public void save (String user, String password) throws WeeklyHoursDatabaseException;
+    public void load (String user, String password) throws WeeklyHoursDatabaseException;
 }

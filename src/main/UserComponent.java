@@ -11,8 +11,9 @@ import java.util.Scanner;
  *
  * @author Albert
  */
-public interface Component {
+public interface UserComponent {
     public final static Scanner DATA = new Scanner(System.in);
-    public void updateComponent()throws WeeklyHoursDatabaseException;
+    public void updateComponent() throws WeeklyHoursDatabaseException;
     public void showComponent();
+    public void deleteComponent() throws WeeklyHoursDatabaseException;
 }

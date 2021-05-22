@@ -3,24 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package persistance;
 
-import main.Component;
 import main.WeeklyHoursDatabaseException;
 
 /**
  *
  * @author Albert
  */
-public class AdminUser implements Component{
+public class DB4OManager implements PersistanceProviderLogin {
 
     @Override
-    public void updateComponent() throws WeeklyHoursDatabaseException {
+    public void save(String user, String password) throws WeeklyHoursDatabaseException {
     }
 
     @Override
-    public void showComponent() {
-
+    public void load(String user, String password) throws WeeklyHoursDatabaseException {
     }
+    // SAVE THE USER IN DB4O FILE
+
     
 }
