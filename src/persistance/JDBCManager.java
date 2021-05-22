@@ -6,7 +6,7 @@
 package persistance;
 
 import main.WeeklyHoursDatabaseException;
-import model.User;
+import model.UserWorkSheet;
 
 /**
  *
@@ -16,7 +16,7 @@ public class JDBCManager implements PersistanceProviderUser {
     // SAVE THE DATA IN A JDBC
 
     @Override
-    public void save(String user, User userData) throws WeeklyHoursDatabaseException {
+    public void save(String user, UserWorkSheet userData) throws WeeklyHoursDatabaseException {
     }
 
     @Override

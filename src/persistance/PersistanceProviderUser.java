@@ -6,13 +6,13 @@
 package persistance;
 
 import main.WeeklyHoursDatabaseException;
-import model.User;
+import model.UserWorkSheet;
 
 /**
  *
  * @author Albert
  */
 public interface PersistanceProviderUser {
-    public void save (String user, User userData) throws WeeklyHoursDatabaseException;
+    public void save (String user, UserWorkSheet userData) throws WeeklyHoursDatabaseException;
     public void load (String user) throws WeeklyHoursDatabaseException;
 }

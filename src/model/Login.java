@@ -69,6 +69,7 @@ public class Login implements LoginComponent {
         for (int i = 0; i < login.size(); i++) {
             if (login.containsKey(name)) {
                 login.replace(DATA.next(), password);
+                DATA.nextLine();
             }
         }
     }
@@ -77,7 +78,8 @@ public class Login implements LoginComponent {
     public void updatePassword() throws WeeklyHoursDatabaseException {
         System.out.println("\nUsername: " + name);
         System.out.println("\nEnter the new Password: ");
-        login.replace(name, DATA.nextLine());
+        login.replace(name, DATA.next());
+        DATA.nextLine();
     }
 
     @Override
@@ -89,9 +91,9 @@ public class Login implements LoginComponent {
 
     @Override
     public void deleteComponent() {
-        
+        System.out.println("\nUsername: ");
+        login.remove(DATA.next());
+        DATA.nextLine();
     }
-
-    
     
 }
