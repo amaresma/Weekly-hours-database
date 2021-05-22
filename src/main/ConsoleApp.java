@@ -5,11 +5,14 @@
  */
 package main;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Albert
  */
 public class ConsoleApp {
+    private final static Scanner DATA = new Scanner (System.in);
     public static void main (String args[]) {
         
     }
