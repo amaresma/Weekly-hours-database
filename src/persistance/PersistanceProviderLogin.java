@@ -6,12 +6,13 @@
 package persistance;
 
 import main.WeeklyHoursDatabaseException;
+import model.Login;
 
 /**
  *
  * @author Albert
  */
 public interface PersistanceProviderLogin {
-    public void save (String user, String password) throws WeeklyHoursDatabaseException;
-    public void load (String user, String password) throws WeeklyHoursDatabaseException;
+    public void saveDB4O (String database, String username, Login login) throws WeeklyHoursDatabaseException;
+    public void loadDB40 (String database) throws WeeklyHoursDatabaseException;
 }

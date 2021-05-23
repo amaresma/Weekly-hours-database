@@ -6,21 +6,25 @@
 package persistance;
 
 import main.WeeklyHoursDatabaseException;
+import model.Login;
 
 /**
  *
  * @author Albert
  */
 public class DB4OManager implements PersistanceProviderLogin {
+    //private ObjectContainer db;
+
 
     @Override
-    public void save(String user, String password) throws WeeklyHoursDatabaseException {
+    public void saveDB4O(String database, String username, Login login) throws WeeklyHoursDatabaseException {
+        
     }
 
     @Override
-    public void load(String user, String password) throws WeeklyHoursDatabaseException {
+    public void loadDB40(String database) throws WeeklyHoursDatabaseException {
+        System.out.println("HELLO");
     }
-    // SAVE THE USER IN DB4O FILE
 
     
 }

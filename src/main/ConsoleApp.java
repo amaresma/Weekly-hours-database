@@ -8,7 +8,9 @@ package main;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import model.Login;
-import persistance.PersistanceManager;
+import persistance.DB4OManager;
+import persistance.JDBCManager;
+
 
 /**
  *
@@ -18,12 +20,16 @@ public class ConsoleApp {
 
     private final static Scanner DATA = new Scanner(System.in);
     private static Login actualLogin;
-    static private PersistanceManager pm = new PersistanceManager();
+    static private DB4OManager db4oManager = new DB4OManager();
+    static private JDBCManager jdbcManager = new JDBCManager();
+    static private String db4oDatabase = "document.db4o";
+    static private String jdbcDatabase = "";
 
     public static void main(String args[]) throws WeeklyHoursDatabaseException {
         int option = 0;
         do {
             try {
+                db4oManager.loadDB40(db4oDatabase);
                 System.out.println("\nSelect and option: ");
                 System.out.println("\n0. Exit");
                 System.out.println("\n1. Login");
@@ -40,6 +46,8 @@ public class ConsoleApp {
                 }
             } catch (InputMismatchException e) {
                 throw new WeeklyHoursDatabaseException("1");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         } while (option != 0);
 

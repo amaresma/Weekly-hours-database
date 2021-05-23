@@ -13,6 +13,6 @@ import model.UserWorkSheet;
  * @author Albert
  */
 public interface PersistanceProviderUser {
-    public void save (String user, UserWorkSheet userData) throws WeeklyHoursDatabaseException;
-    public void load (String user) throws WeeklyHoursDatabaseException;
+    public void saveJDBC (String database, String username, UserWorkSheet userData) throws WeeklyHoursDatabaseException;
+    public void loadJDBC (String database, String username) throws WeeklyHoursDatabaseException;
 }
