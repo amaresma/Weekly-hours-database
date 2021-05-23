@@ -62,6 +62,7 @@ public class ConsoleApp {
 
     }
 
+    
     public static void loginMenu() throws WeeklyHoursDatabaseException, InputMismatchException {
         try {
             String name = selectLogin();
