@@ -7,6 +7,7 @@ package model;
 
 import java.util.HashMap;
 import java.util.Map;
+import main.ConsoleApp;
 import main.WeeklyHoursDatabaseException;
 import main.LoginComponent;
 
@@ -19,6 +20,7 @@ public class Login implements LoginComponent {
     private String name;
     private String password;
     private Map<String, String> login = new HashMap();
+    private ConsoleApp app;
     
     /**
      * Constructor that creates a User
@@ -28,6 +30,10 @@ public class Login implements LoginComponent {
     public Login(String name, String password) {
         this.name = name;
         this.password = password;
+    }
+
+    public Login() {
+        
     }
     
     public String getName() {
@@ -54,12 +60,13 @@ public class Login implements LoginComponent {
         this.login.put(name, password);
     }
     
-    public void addLogin() {
+    public Login addLogin() {
         System.out.println("\nUsername: ");
         String nameSet = DATA.nextLine();
         System.out.println("\nPassword: ");
         String passwordSet = DATA.nextLine();
         setLogin(nameSet, passwordSet);
+        return null;
     }
     
     @Override

@@ -13,6 +13,6 @@ import model.Login;
  * @author Albert
  */
 public interface PersistanceProviderLogin {
-    public void saveDB4O (String database, String username, Login login) throws WeeklyHoursDatabaseException;
+    public void saveDB4O (String database, Login login) throws WeeklyHoursDatabaseException;
     public void loadDB40 (String database) throws WeeklyHoursDatabaseException;
 }

@@ -11,7 +11,6 @@ import model.Login;
 import persistance.DB4OManager;
 import persistance.JDBCManager;
 
-
 /**
  *
  * @author Albert
@@ -20,13 +19,19 @@ public class ConsoleApp {
 
     private final static Scanner DATA = new Scanner(System.in);
     private static Login actualLogin;
+    private static Login login;
     static private DB4OManager db4oManager = new DB4OManager();
     static private JDBCManager jdbcManager = new JDBCManager();
     static private String db4oDatabase = "database.db4o";
     static private String jdbcDatabase = "";
+
     
+
     public String getDB4O() {
         return db4oDatabase;
+    }
+    
+    public void setLogin() {
     }
 
     public static void main(String args[]) throws WeeklyHoursDatabaseException {
@@ -56,22 +61,66 @@ public class ConsoleApp {
         } while (option != 0);
 
     }
-    
+
     public static void loginMenu() throws WeeklyHoursDatabaseException, InputMismatchException {
-        String name = selectLogin();
-        if (null == name) {
-            System.out.println("Wrong user");
-        } else switch (name) {
-            case "admin":
-                adminMenu();
-                break;
-            default:
-                break;
+        try {
+            String name = selectLogin();
+            if (null == name) {
+                System.out.println("Wrong user");
+            } else {
+                switch (name) {
+                    case "admin":
+
+                        adminMenu();
+                        break;
+                    default:
+                        userMenu();
+                        break;
+                }
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("ERROR LOGIN MENU");
+            throw new WeeklyHoursDatabaseException("1");
         }
-        
+
+    }
+
+    private static void adminMenu() throws WeeklyHoursDatabaseException {
+        int option = 0;
+        do {
+            System.out.println("\nSelect and option: ");
+            System.out.println("\n0. Exit");
+            System.out.println("\n1. Add user");
+            System.out.println("\n2. Update username");
+            System.out.println("\n3. Update password");
+            System.out.println("\n4. Delete user");
+            System.out.println("\n5. Save");
+            option = DATA.nextInt();
+            
+            switch (option) {
+                case 0:
+                    break;
+                case 1:
+                    login = new Login();
+                    login.addLogin();
+                    //db4oManager.saveDB4O(db4oDatabase, actualLogin.getLogin()., actualLogin);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    db4oManager.saveDB4O(db4oDatabase, login);
+                    break;
+                default:
+                    System.out.println("ADMIN MENU ERROR");
+            }
+        } while (option != 0);
     }
     
-    private static void adminMenu() {
+    private static void userMenu() {
         System.out.println("HOLI");
     }
 
@@ -86,19 +135,17 @@ public class ConsoleApp {
             return username;
         } else {
             try {
-                for (int i = 0; i < actualLogin.getLogin().size(); i++) {
-                if (actualLogin.getLogin().containsKey(username) && actualLogin.getLogin().containsValue(password)) {
-                    return username;
+                for (int i = 0; i < login.getLogin().size(); i++) {
+                    if (login.getLogin().containsKey(username) && login.getLogin().containsValue(password)) {
+                        return username;
+                    }
                 }
-            }
             } catch (NullPointerException e) {
                 System.out.println("User doesn't exist");
             }
-            
+
         }
         return null;
     }
-
-    
 
 }
