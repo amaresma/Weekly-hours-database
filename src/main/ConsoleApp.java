@@ -22,8 +22,12 @@ public class ConsoleApp {
     private static Login actualLogin;
     static private DB4OManager db4oManager = new DB4OManager();
     static private JDBCManager jdbcManager = new JDBCManager();
-    static private String db4oDatabase = "document.db4o";
+    static private String db4oDatabase = "database.db4o";
     static private String jdbcDatabase = "";
+    
+    public String getDB4O() {
+        return db4oDatabase;
+    }
 
     public static void main(String args[]) throws WeeklyHoursDatabaseException {
         int option = 0;

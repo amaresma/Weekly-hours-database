@@ -5,6 +5,11 @@
  */
 package persistance;
 
+import com.db4o.Db4oEmbedded;
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import com.db4o.config.EmbeddedConfiguration;
+import main.ConsoleApp;
 import main.WeeklyHoursDatabaseException;
 import model.Login;
 
@@ -13,17 +18,52 @@ import model.Login;
  * @author Albert
  */
 public class DB4OManager implements PersistanceProviderLogin {
-    //private ObjectContainer db;
-
+    private ObjectContainer db;
+    private Login login;
+    private ConsoleApp app;
+    
+    public Login getLogin() {
+        return login;
+    }
+    
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+    
+    public void startConnection() {
+        EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
+        config.common().objectClass(Login.class).cascadeOnUpdate(true);
+        db = Db4oEmbedded.openFile("database.db4o");
+    }
+    
+    public void stopConnection() {
+        db.close();
+    }
 
     @Override
     public void saveDB4O(String database, String username, Login login) throws WeeklyHoursDatabaseException {
         
-    }
+        }
+    
 
     @Override
     public void loadDB40(String database) throws WeeklyHoursDatabaseException {
-        System.out.println("HELLO");
+        try {
+            startConnection();
+            ObjectSet<Login> result = db.queryByExample(login);
+            if (result.isEmpty()) {
+                throw new WeeklyHoursDatabaseException("Database doesn't exist");
+            } else {
+                while (result.hasNext()) {
+                    Login loginQuery = result.next();
+                    login = loginQuery;
+                }
+            }
+            
+        } catch (Exception e) {
+        } finally {
+            stopConnection();
+        }
     }
 
     
