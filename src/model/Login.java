@@ -60,13 +60,12 @@ public class Login implements LoginComponent {
         this.login.put(name, password);
     }
     
-    public Login addLogin() {
+    public void addLogin() {
         System.out.println("\nUsername: ");
         String nameSet = DATA.nextLine();
         System.out.println("\nPassword: ");
         String passwordSet = DATA.nextLine();
         setLogin(nameSet, passwordSet);
-        return null;
     }
     
     @Override

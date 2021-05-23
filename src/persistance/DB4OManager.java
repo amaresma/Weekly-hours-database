@@ -71,10 +71,17 @@ public class DB4OManager implements PersistanceProviderLogin {
             if (result.isEmpty()) {
                 throw new WeeklyHoursDatabaseException("Database doesn't exist");
             } else {
+                System.out.println(result.size());
                 while (result.hasNext()) {
-                    Login loginQuery = result.next();
-                    login = loginQuery;
+                    System.out.println(result.next());
                 }
+                /*
+                while (result.hasNext()) {
+                    System.out.println("HAY ALGO");
+                    //Login loginQuery = result.next();
+                    //login = loginQuery;
+                }
+                */
             }
 
         } catch (WeeklyHoursDatabaseException e) {

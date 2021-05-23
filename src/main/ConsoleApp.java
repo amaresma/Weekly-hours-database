@@ -19,7 +19,7 @@ public class ConsoleApp {
 
     private final static Scanner DATA = new Scanner(System.in);
     private static Login actualLogin;
-    private static Login login;
+    private static Login login = new Login();
     static private DB4OManager db4oManager = new DB4OManager();
     static private JDBCManager jdbcManager = new JDBCManager();
     static private String db4oDatabase = "database.db4o";
@@ -101,7 +101,6 @@ public class ConsoleApp {
                 case 0:
                     break;
                 case 1:
-                    login = new Login();
                     login.addLogin();
                     //db4oManager.saveDB4O(db4oDatabase, actualLogin.getLogin()., actualLogin);
                     break;
