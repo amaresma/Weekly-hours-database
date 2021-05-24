@@ -10,5 +10,5 @@ package view;
  * @author Albert
  */
 public class LoginForm {
-    
+    // GUI
 }
