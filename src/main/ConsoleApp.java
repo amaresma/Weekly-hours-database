@@ -5,7 +5,10 @@
  */
 package main;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import model.Login;
 import persistance.DB4OManager;
@@ -19,11 +22,12 @@ public class ConsoleApp {
 
     private final static Scanner DATA = new Scanner(System.in);
     private static Login actualLogin;
-    private static Login login = new Login();
+    private static Login login;
     static private DB4OManager db4oManager = new DB4OManager();
     static private JDBCManager jdbcManager = new JDBCManager();
     static private String db4oDatabase = "database.db4o";
     static private String jdbcDatabase = "";
+    private static List<Login> loginList = new ArrayList();
 
     
 
@@ -31,7 +35,8 @@ public class ConsoleApp {
         return db4oDatabase;
     }
     
-    public void setLogin() {
+    public void setLogin(Login login) {
+        loginList.add(login);
     }
 
     public static void main(String args[]) throws WeeklyHoursDatabaseException {
@@ -95,15 +100,18 @@ public class ConsoleApp {
             System.out.println("\n2. Update username");
             System.out.println("\n3. Update password");
             System.out.println("\n4. Delete user");
-            System.out.println("\n5. Save");
+            System.out.println("\n5. Show users");
             option = DATA.nextInt();
             
             switch (option) {
                 case 0:
                     break;
                 case 1:
-                    login.addLogin();
+                    login = login.addLogin();
+                    loginList.add(login);
+                    //login.setLogin(login.getName(), login.getPassword());
                     //db4oManager.saveDB4O(db4oDatabase, actualLogin.getLogin()., actualLogin);
+                    db4oManager.saveDB4O(db4oDatabase, login);
                     break;
                 case 2:
                     break;
@@ -112,7 +120,9 @@ public class ConsoleApp {
                 case 4:
                     break;
                 case 5:
-                    db4oManager.saveDB4O(db4oDatabase, login);
+                    for (int i = 0; i < loginList.size(); i++) {
+                        loginList.get(i).showComponent();
+                    }
                     break;
                 default:
                     System.out.println("ADMIN MENU ERROR");
@@ -135,10 +145,8 @@ public class ConsoleApp {
             return username;
         } else {
             try {
-                for (int i = 0; i < login.getLogin().size(); i++) {
-                    if (login.getLogin().containsKey(username) && login.getLogin().containsValue(password)) {
-                        return username;
-                    }
+                for (int i = 0; i < loginList.size(); i++) {
+
                 }
             } catch (NullPointerException e) {
                 System.out.println("User doesn't exist");

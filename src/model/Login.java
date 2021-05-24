@@ -5,7 +5,9 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import main.ConsoleApp;
 import main.WeeklyHoursDatabaseException;
@@ -19,8 +21,8 @@ public class Login implements LoginComponent {
     
     private String name;
     private String password;
-    private Map<String, String> login = new HashMap();
     private ConsoleApp app;
+    //List<Login> loginList = new ArrayList();
     
     /**
      * Constructor that creates a User
@@ -52,54 +54,48 @@ public class Login implements LoginComponent {
         this.password = password;
     }
     
-    public Map<String, String> getLogin() {
-        return login;
+    /*
+    public List<Login> getLogin() {
+        return loginList;
     }
     
-    public void setLogin (String name, String password) {
-        this.login.put(name, password);
+    public void setLogin (Login login) {
+        loginList.add(login);
     }
-    
-    public void addLogin() {
+    */
+    public static Login addLogin() {
         System.out.println("\nUsername: ");
         String nameSet = DATA.nextLine();
         System.out.println("\nPassword: ");
         String passwordSet = DATA.nextLine();
-        setLogin(nameSet, passwordSet);
+        return new Login(nameSet, passwordSet);
     }
     
     @Override
     public void updateUsername() throws WeeklyHoursDatabaseException {
         System.out.println("\nUsername: " + name);
         System.out.println("\nEnter the new UserName: ");
-        for (int i = 0; i < login.size(); i++) {
-            if (login.containsKey(name)) {
-                login.replace(DATA.next(), password);
-                DATA.nextLine();
-            }
-        }
+        name = DATA.next();
     }
 
     @Override
     public void updatePassword() throws WeeklyHoursDatabaseException {
         System.out.println("\nUsername: " + name);
         System.out.println("\nEnter the new Password: ");
-        login.replace(name, DATA.next());
-        DATA.nextLine();
+        password = DATA.next();
     }
 
     @Override
     public void showComponent() {
-        for (int i = 0; i < login.size(); i++) {
-            System.out.println(login.get(i));
-        }
+        System.out.println("Username: " + name);
+        System.out.println("Passowrd: " + password);
     }
 
     @Override
     public void deleteComponent() {
         System.out.println("\nUsername: ");
-        login.remove(DATA.next());
-        DATA.nextLine();
+        String username = DATA.next();
+        
     }
     
 }
