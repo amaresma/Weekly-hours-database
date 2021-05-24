@@ -22,7 +22,6 @@ public class DB4OManager implements PersistanceProviderLogin {
 
     private ObjectContainer db;
     private Login login;
-    private ConsoleApp app;
 
     public Login getLogin() {
         return login;
@@ -63,7 +62,7 @@ public class DB4OManager implements PersistanceProviderLogin {
             ObjectSet<Login> result = db.queryByExample(test);
             while(result.hasNext()) {
                 Login input = result.next();
-                app.setLogin(input);
+                ConsoleApp.setLogin(input);
             }
             
         } catch (Exception e) {

@@ -35,7 +35,7 @@ public class ConsoleApp {
         return db4oDatabase;
     }
     
-    public void setLogin(Login login) {
+    public static void setLogin(Login login) {
         loginList.add(login);
     }
 

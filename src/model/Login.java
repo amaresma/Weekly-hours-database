@@ -87,8 +87,7 @@ public class Login implements LoginComponent {
 
     @Override
     public void showComponent() {
-        System.out.println("Username: " + name);
-        System.out.println("Passowrd: " + password);
+        System.out.println("\nUsername: " + name + "\nPassowrd: " + password);
     }
 
     @Override
