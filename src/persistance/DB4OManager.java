@@ -46,6 +46,7 @@ public class DB4OManager implements PersistanceProviderLogin {
         try {
             startConnection();
             db.store(login);
+            db.commit();
         } catch (Exception e) {
             System.out.println("ERROR DB4O SAVE");
         } finally {

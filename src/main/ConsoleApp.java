@@ -29,12 +29,10 @@ public class ConsoleApp {
     static private String jdbcDatabase = "";
     private static List<Login> loginList = new ArrayList();
 
-    
-
     public String getDB4O() {
         return db4oDatabase;
     }
-    
+
     public static void setLogin(Login login) {
         loginList.add(login);
     }
@@ -67,7 +65,6 @@ public class ConsoleApp {
 
     }
 
-    
     public static void loginMenu() throws WeeklyHoursDatabaseException, InputMismatchException {
         try {
             String name = selectLogin();
@@ -102,18 +99,37 @@ public class ConsoleApp {
             System.out.println("\n4. Delete user");
             System.out.println("\n5. Show users");
             option = DATA.nextInt();
-            
+
             switch (option) {
                 case 0:
                     break;
                 case 1:
+                    boolean exists = false;
                     login = login.addLogin();
-                    loginList.add(login);
+                    if (loginList.isEmpty()) {
+                        loginList.add(login);
+                        db4oManager.saveDB4O(db4oDatabase, login);
+                    } else {
+                        for (int i = 0; i < loginList.size(); i++) {
+                            if (loginList.get(i).getName().equals(login.getName())) {
+                                System.out.println("User already exists");
+                                exists = true;
+                            }
+                        }
+                        if (!exists) {
+                            loginList.add(login);
+                                db4oManager.saveDB4O(db4oDatabase, login);
+                        }
+                    }
+
                     //login.setLogin(login.getName(), login.getPassword());
                     //db4oManager.saveDB4O(db4oDatabase, actualLogin.getLogin()., actualLogin);
-                    db4oManager.saveDB4O(db4oDatabase, login);
                     break;
                 case 2:
+                    login.updateUsername();
+                    if (true) {
+
+                    }
                     break;
                 case 3:
                     break;
@@ -129,9 +145,38 @@ public class ConsoleApp {
             }
         } while (option != 0);
     }
-    
+
     private static void userMenu() {
         System.out.println("HOLI");
+        int option = 0;
+        do {
+            System.out.println("\nSelect and option: ");
+            System.out.println("\n0. Exit");
+            System.out.println("\n1. Add WorkDay");
+            System.out.println("\n2. Update WorkDay");
+            System.out.println("\n3. Delete WorkDay");
+            System.out.println("\n4. Show WorkDay");
+            option = DATA.nextInt();
+            
+            switch (option) {
+                case 0:
+                    break;
+                case 1:
+                    //add workday;
+                    break;
+                case 2:
+                    //update workday
+                    break;
+                case 3:
+                    //delete workday
+                    break;
+                case 4:
+                    //show Workday
+                    break;
+                default:
+                    break;
+            }
+        } while (option != 0);
     }
 
     public static String selectLogin() {
@@ -146,7 +191,9 @@ public class ConsoleApp {
         } else {
             try {
                 for (int i = 0; i < loginList.size(); i++) {
-
+                    if (loginList.get(i).getName().equals(username) && loginList.get(i).getPassword().equals(password)) {
+                        return username;
+                    }
                 }
             } catch (NullPointerException e) {
                 System.out.println("User doesn't exist");
