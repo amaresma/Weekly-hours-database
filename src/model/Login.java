@@ -7,25 +7,28 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import main.Component;
 import main.ConsoleApp;
 import main.WeeklyHoursDatabaseException;
-import main.LoginComponent;
 
 /**
  *
  * @author Albert
  */
-public class Login implements LoginComponent {
-    
+public class Login implements Component {
+
     private String name;
     private String password;
-    private ConsoleApp app;
+    //private ConsoleApp app;
+    List<UserWorkSheet> userWorkSheetList = new ArrayList();
     //List<Login> loginList = new ArrayList();
-    
+
     /**
      * Constructor that creates a User
+     *
      * @param name
      * @param password
      */
@@ -35,34 +38,25 @@ public class Login implements LoginComponent {
     }
 
     public Login() {
-        
+
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getPassword() {
         return this.password;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    /*
-    public List<Login> getLogin() {
-        return loginList;
-    }
-    
-    public void setLogin (Login login) {
-        loginList.add(login);
-    }
-    */
+
     public static Login addLogin() {
         System.out.println("\nUsername: ");
         String nameSet = DATA.nextLine();
@@ -70,31 +64,49 @@ public class Login implements LoginComponent {
         String passwordSet = DATA.nextLine();
         return new Login(nameSet, passwordSet);
     }
-    
-    @Override
-    public void updateUsername() throws WeeklyHoursDatabaseException {
-        System.out.println("\nUsername: " + name);
-        System.out.println("\nEnter the new UserName: ");
-        name = DATA.next();
+
+    public void addUserWorkSheet(UserWorkSheet userWorkSheet) throws WeeklyHoursDatabaseException {
+        if (userWorkSheet == null) {
+            userWorkSheet = UserWorkSheet.addWorkSheet();
+        }
+        // Select component conditions needs to be done
+        userWorkSheetList.add(userWorkSheet);
+        for (int i = 0; i < userWorkSheetList.size(); i++) {
+            System.out.println(userWorkSheetList.get(i).getDay());
+            System.out.println(userWorkSheetList.get(i).getHours());
+        }
     }
 
     @Override
-    public void updatePassword() throws WeeklyHoursDatabaseException {
-        System.out.println("\nUsername: " + name);
-        System.out.println("\nEnter the new Password: ");
-        password = DATA.next();
+    public void showComponent(int option) {
+        switch (option) {
+            case 1:
+                System.out.println("\nUsername: " + name + "\nPassowrd: " + password);
+                break;
+        }
+
+    }
+
+    public static void deleteComponent(String user) {
+        for (int i = 0; i < ConsoleApp.getLogin().size(); i++) {
+            if (ConsoleApp.getLogin().get(i).getName().equals(user)) {
+                ConsoleApp.getLogin().remove(i);
+            }
+        }
     }
 
     @Override
-    public void showComponent() {
-        System.out.println("\nUsername: " + name + "\nPassowrd: " + password);
+    public void updateComponent(int option) {
+        switch (option) {
+            case 1:
+                System.out.println("\nEnter the new UserName: ");
+                name = DATA.next();
+                break;
+            case 2:
+                System.out.println("\nEnter the new Password: ");
+                password = DATA.next();
+                break;
+        }
     }
 
-    @Override
-    public void deleteComponent() {
-        System.out.println("\nUsername: ");
-        String username = DATA.next();
-        
-    }
-    
 }

@@ -6,24 +6,30 @@
 package persistance;
 
 import main.WeeklyHoursDatabaseException;
+import model.Login;
 import model.UserWorkSheet;
 
 /**
  *
  * @author Albert
  */
-public class JDBCManager implements PersistanceProviderUser {
-
-    
+public class JDBCManager implements PersistanceProvider {
 
     @Override
-    public void saveJDBC(String database, String username, UserWorkSheet userData) throws WeeklyHoursDatabaseException {
-        
+    public void save(String database, String item, Login login, int option) throws WeeklyHoursDatabaseException {
+        switch (option) {
+            case 1: // ADD
+                break;
+            case 2: // UPDATE
+                break;
+            case 3: // DELETE
+                break;
+        }
     }
 
     @Override
-    public void loadJDBC(String database, String username) throws WeeklyHoursDatabaseException {
-        
+    public void load(String database) throws WeeklyHoursDatabaseException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

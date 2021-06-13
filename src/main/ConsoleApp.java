@@ -21,7 +21,6 @@ import persistance.JDBCManager;
 public class ConsoleApp {
 
     private final static Scanner DATA = new Scanner(System.in);
-    private static Login actualLogin;
     private static Login login;
     static private DB4OManager db4oManager = new DB4OManager();
     static private JDBCManager jdbcManager = new JDBCManager();
@@ -32,6 +31,10 @@ public class ConsoleApp {
     public String getDB4O() {
         return db4oDatabase;
     }
+    
+    public static List<Login> getLogin() {
+        return loginList;
+    }
 
     public static void setLogin(Login login) {
         loginList.add(login);
@@ -41,7 +44,7 @@ public class ConsoleApp {
         int option = 0;
         do {
             try {
-                db4oManager.loadDB40(db4oDatabase);
+                db4oManager.load(db4oDatabase);
                 System.out.println("\nSelect and option: ");
                 System.out.println("\n0. Exit");
                 System.out.println("\n1. Login");
@@ -67,7 +70,7 @@ public class ConsoleApp {
 
     public static void loginMenu() throws WeeklyHoursDatabaseException, InputMismatchException {
         try {
-            String name = selectLogin();
+            String name = selectLogin(1);
             if (null == name) {
                 System.out.println("Wrong user");
             } else {
@@ -77,6 +80,11 @@ public class ConsoleApp {
                         adminMenu();
                         break;
                     default:
+                        for (int i = 0; i < loginList.size(); i++) {
+                            if (loginList.get(i).getName().equals(name)) {
+                                login = loginList.get(i);
+                            }
+                        }
                         userMenu();
                         break;
                 }
@@ -103,12 +111,12 @@ public class ConsoleApp {
             switch (option) {
                 case 0:
                     break;
-                case 1:
+                case 1: // ADD USER
                     boolean exists = false;
                     login = login.addLogin();
                     if (loginList.isEmpty()) {
                         loginList.add(login);
-                        db4oManager.saveDB4O(db4oDatabase, login);
+                        db4oManager.save(db4oDatabase, login.getName(), login, 1);
                     } else {
                         for (int i = 0; i < loginList.size(); i++) {
                             if (loginList.get(i).getName().equals(login.getName())) {
@@ -118,26 +126,42 @@ public class ConsoleApp {
                         }
                         if (!exists) {
                             loginList.add(login);
-                                db4oManager.saveDB4O(db4oDatabase, login);
+                            db4oManager.save(db4oDatabase, login.getName(), login, 1);
                         }
                     }
-
-                    //login.setLogin(login.getName(), login.getPassword());
-                    //db4oManager.saveDB4O(db4oDatabase, actualLogin.getLogin()., actualLogin);
                     break;
-                case 2:
-                    login.updateUsername();
-                    if (true) {
-
+                case 2: // UPDATE USERNAME
+                    boolean save = false;
+                    String userU = selectLogin(2);
+                    for (int i = 0; i < loginList.size(); i++) {
+                        if (loginList.get(i).getName().equals(userU)) {
+                            loginList.get(i).updateComponent(1);
+                            db4oManager.save(db4oDatabase, userU, loginList.get(i), 2);
+                            //login.updateComponent(1);
+                        }
                     }
                     break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
+                case 3: // UPDATE PASSWORD
+                    String userP = selectLogin(2);
                     for (int i = 0; i < loginList.size(); i++) {
-                        loginList.get(i).showComponent();
+                        if (loginList.get(i).getName().equals(userP)) {
+                            loginList.get(i).updateComponent(2);
+                            db4oManager.save(db4oDatabase, userP, loginList.get(i), 3);
+                        }
+                    }
+                    break;
+                case 4: // DELETE USERNAME
+                    String userD = selectLogin(2);
+                    for (int i = 0; i < loginList.size(); i++) {
+                        if (loginList.get(i).getName().equals(userD)) {
+                            db4oManager.save(db4oDatabase, userD, loginList.get(i), 4);
+                            loginList.get(i).deleteComponent(userD);
+                        }    
+                    }
+                    break;
+                case 5: // SHOW USERS
+                    for (int i = 0; i < loginList.size(); i++) {
+                        loginList.get(i).showComponent(1);
                     }
                     break;
                 default:
@@ -146,8 +170,7 @@ public class ConsoleApp {
         } while (option != 0);
     }
 
-    private static void userMenu() {
-        System.out.println("HOLI");
+    private static void userMenu() throws WeeklyHoursDatabaseException {
         int option = 0;
         do {
             System.out.println("\nSelect and option: ");
@@ -157,15 +180,17 @@ public class ConsoleApp {
             System.out.println("\n3. Delete WorkDay");
             System.out.println("\n4. Show WorkDay");
             option = DATA.nextInt();
-            
+
             switch (option) {
                 case 0:
                     break;
                 case 1:
                     //add workday;
+                    login.addUserWorkSheet(null);
                     break;
                 case 2:
                     //update workday
+
                     break;
                 case 3:
                     //delete workday
@@ -179,28 +204,36 @@ public class ConsoleApp {
         } while (option != 0);
     }
 
-    public static String selectLogin() {
-        System.out.println("\nUsername: ");
-        String username = DATA.next();
-        DATA.nextLine();
-        System.out.println("\nPassword: ");
-        String password = DATA.next();
-        DATA.nextLine();
-        if (username.equals("admin") && password.equals("123")) {
-            return username;
-        } else {
-            try {
-                for (int i = 0; i < loginList.size(); i++) {
-                    if (loginList.get(i).getName().equals(username) && loginList.get(i).getPassword().equals(password)) {
-                        return username;
+    public static String selectLogin(int option) {
+        String item = null;
+        switch (option) {
+            case 1:
+                System.out.println("\nUsername: ");
+                String username = DATA.next();
+                DATA.nextLine();
+                System.out.println("\nPassword: ");
+                String password = DATA.next();
+                DATA.nextLine();
+                if (username.equals("admin") && password.equals("123")) {
+                    return username;
+                } else {
+                    try {
+                        for (int i = 0; i < loginList.size(); i++) {
+                            if (loginList.get(i).getName().equals(username) && loginList.get(i).getPassword().equals(password)) {
+                                return username;
+                            }
+                        }
+                    } catch (NullPointerException e) {
+                        System.out.println("User doesn't exist");
                     }
                 }
-            } catch (NullPointerException e) {
-                System.out.println("User doesn't exist");
-            }
-
+                break;
+            case 2:
+                System.out.println("Select user: ");
+                item = DATA.next();
+                break;
         }
-        return null;
+        return item;
     }
 
 }
