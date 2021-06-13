@@ -18,64 +18,64 @@ import main.WeeklyHoursDatabaseException;
  *
  * @author Albert
  */
-public class UserWorkSheet implements Component{
+public class UserWorkSheet implements Component {
+
     private int date, month, year;
     private int hours, minutes, normalH, extraH;
     private boolean saturday = false, sunday = false, bankHoliday = false;
     String keyboard;
     private static Calendar c;
-    
-    
-    public UserWorkSheet(int date, int month, int year, int hours, int minutes, 
-            int normal, int extra, boolean saturday, boolean sunday, 
+
+    public UserWorkSheet(int date, int month, int year, int hours, int minutes,
+            int normal, int extra, boolean saturday, boolean sunday,
             boolean bankHoliday) throws WeeklyHoursDatabaseException {
         this.date = date;
     }
-    
+
     public int getDay() {
         return date;
     }
-    
+
     public void setDate(int date) {
         this.date = date;
     }
-    
+
     public int getMonth() {
         return month;
     }
-    
+
     public void setMonth(int month) {
         this.month = month;
     }
-    
+
     public int getYear() {
         return year;
     }
-    
+
     public void setYear(int year) {
         this.year = year;
     }
-    
+
     public int getHours() {
         return hours;
     }
-    
+
     public void setHours(int hours) {
         this.hours = hours;
     }
-    
+
     public int getMinutes() {
         return minutes;
     }
-    
+
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
-    
+
     public static UserWorkSheet addWorkSheet() throws WeeklyHoursDatabaseException {
         int date = 0, month = 0, year = 0, hours = 0, minutes = 0, extra = 0, normal = 0;
         boolean saturday = false, sunday = false, bankHoliday = false;
-        
+
         try {
             System.out.println("Enter day: ");
             date = DATA.nextInt();
@@ -99,13 +99,13 @@ public class UserWorkSheet implements Component{
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        
+
         if (minutes >= 30) {
             minutes = 30;
         } else {
             minutes = 0;
         }
-        
+
         if (hours > 8) {
             normal = 8;
             extra = hours - normal;
@@ -132,5 +132,5 @@ public class UserWorkSheet implements Component{
     public void showComponent(int option) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -11,7 +11,6 @@ import com.db4o.ObjectSet;
 import com.db4o.config.EmbeddedConfiguration;
 import com.db4o.query.Predicate;
 import java.util.List;
-import java.util.Map;
 import main.ConsoleApp;
 import main.WeeklyHoursDatabaseException;
 import model.Login;
@@ -44,7 +43,7 @@ public class DB4OManager implements PersistanceProvider {
     }
 
     @Override
-    public void save  (String database, String item, Login pLogin, int option) throws WeeklyHoursDatabaseException {
+    public void save(String database, String item, Login pLogin, int option) throws WeeklyHoursDatabaseException {
         try {
             startConnection();
             List<Login> logins = db.query(new Predicate<Login>() {
@@ -104,7 +103,7 @@ public class DB4OManager implements PersistanceProvider {
     }
 
     @Override
-    public void load (String database) throws WeeklyHoursDatabaseException {
+    public void load(String database) throws WeeklyHoursDatabaseException {
         try {
             startConnection();
             Login test = new Login();

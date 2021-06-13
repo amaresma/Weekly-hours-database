@@ -8,7 +8,6 @@ package main;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import model.Login;
 import persistance.DB4OManager;
@@ -31,7 +30,7 @@ public class ConsoleApp {
     public String getDB4O() {
         return db4oDatabase;
     }
-    
+
     public static List<Login> getLogin() {
         return loginList;
     }
@@ -156,7 +155,7 @@ public class ConsoleApp {
                         if (loginList.get(i).getName().equals(userD)) {
                             db4oManager.save(db4oDatabase, userD, loginList.get(i), 4);
                             loginList.get(i).deleteComponent(userD);
-                        }    
+                        }
                     }
                     break;
                 case 5: // SHOW USERS

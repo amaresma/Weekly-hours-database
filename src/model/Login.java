@@ -6,10 +6,7 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import main.Component;
 import main.ConsoleApp;
 import main.WeeklyHoursDatabaseException;
@@ -22,9 +19,7 @@ public class Login implements Component {
 
     private String name;
     private String password;
-    //private ConsoleApp app;
-    List<UserWorkSheet> userWorkSheetList = new ArrayList();
-    //List<Login> loginList = new ArrayList();
+    private static List<UserWorkSheet> userWorkSheetList = new ArrayList();
 
     /**
      * Constructor that creates a User
@@ -77,6 +72,14 @@ public class Login implements Component {
         }
     }
 
+    public static void deleteComponent(String user) {
+        for (int i = 0; i < ConsoleApp.getLogin().size(); i++) {
+            if (ConsoleApp.getLogin().get(i).getName().equals(user)) {
+                ConsoleApp.getLogin().remove(i);
+            }
+        }
+    }
+
     @Override
     public void showComponent(int option) {
         switch (option) {
@@ -85,14 +88,6 @@ public class Login implements Component {
                 break;
         }
 
-    }
-
-    public static void deleteComponent(String user) {
-        for (int i = 0; i < ConsoleApp.getLogin().size(); i++) {
-            if (ConsoleApp.getLogin().get(i).getName().equals(user)) {
-                ConsoleApp.getLogin().remove(i);
-            }
-        }
     }
 
     @Override
