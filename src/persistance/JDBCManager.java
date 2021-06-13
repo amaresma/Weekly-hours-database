@@ -13,6 +13,7 @@ import model.Login;
  * @author Albert
  */
 public class JDBCManager implements PersistanceProvider {
+    // username: root password: whdb1234
 
     @Override
     public void save(String database, String item, Login login, int option) throws WeeklyHoursDatabaseException {
