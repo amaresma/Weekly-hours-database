@@ -10,6 +10,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import model.Login;
+import model.UserWorkSheet;
 import persistance.DB4OManager;
 import persistance.JDBCManager;
 
@@ -21,6 +22,7 @@ public class ConsoleApp {
 
     private final static Scanner DATA = new Scanner(System.in);
     private static Login login;
+    private UserWorkSheet test;
     static private DB4OManager db4oManager = new DB4OManager();
     static private JDBCManager jdbcManager = new JDBCManager();
     static private String db4oDatabase = "database.db4o";
@@ -196,6 +198,12 @@ public class ConsoleApp {
                     break;
                 case 4:
                     //show Workday
+                    for (int i = 0; i < login.getUserWorkSheet().size(); i++) {
+                        System.out.println("YEAR: " + login.getUserWorkSheet().get(i).getYear());
+                        System.out.println("MONTH: " + login.getUserWorkSheet().get(i).getMonth());
+                        System.out.println("DAY: " + login.getUserWorkSheet().get(i).getDay());
+                        System.out.println("MINUTES: " + login.getUserWorkSheet().get(i).getMinutes());
+                    }
                     break;
                 default:
                     break;

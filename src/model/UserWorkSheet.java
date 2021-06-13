@@ -6,11 +6,7 @@
 package model;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import main.Component;
 import main.WeeklyHoursDatabaseException;
 
@@ -19,24 +15,75 @@ import main.WeeklyHoursDatabaseException;
  * @author Albert
  */
 public class UserWorkSheet implements Component {
-
+    
+    Login login;
     private int date, month, year;
     private int hours, minutes, normalH, extraH;
     private boolean saturday = false, sunday = false, bankHoliday = false;
-    String keyboard;
-    private static Calendar c;
+    private static String keyboard;
+    
+    private static Calendar c = new Calendar() {
+        @Override
+        protected void computeTime() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        protected void computeFields() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void add(int field, int amount) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void roll(int field, boolean up) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int getMinimum(int field) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int getMaximum(int field) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int getGreatestMinimum(int field) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int getLeastMaximum(int field) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    };
 
     public UserWorkSheet(int date, int month, int year, int hours, int minutes,
-            int normal, int extra, boolean saturday, boolean sunday,
+            int normalH, int extraH, boolean saturday, boolean sunday,
             boolean bankHoliday) throws WeeklyHoursDatabaseException {
         this.date = date;
+        this.month = month;
+        this.year = year;
+        this.hours = hours;
+        this.minutes = minutes;
+        this.normalH = normalH;
+        this.extraH = extraH;
+        this.saturday = saturday;
+        this.sunday = sunday;
+        this.bankHoliday = bankHoliday;
     }
 
     public int getDay() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDay(int date) {
         this.date = date;
     }
 
@@ -71,22 +118,52 @@ public class UserWorkSheet implements Component {
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
+    
+    public int getNormalH() {
+        return normalH;
+    }
+    
+    public int getExtraH() {
+        return extraH;
+    }
+    
+    public boolean getSaturday() {
+        return saturday;
+    }
+    
+    public boolean getSunday() {
+        return sunday;
+    }
+    
+    public boolean getBankHoliday() {
+        return bankHoliday;
+    }
 
     public static UserWorkSheet addWorkSheet() throws WeeklyHoursDatabaseException {
         int date = 0, month = 0, year = 0, hours = 0, minutes = 0, extra = 0, normal = 0;
         boolean saturday = false, sunday = false, bankHoliday = false;
 
         try {
-            System.out.println("Enter day: ");
+            System.out.println("\nEnter day: ");
             date = DATA.nextInt();
-            System.out.println("Enter month: ");
+            System.out.println("\nEnter month: ");
             month = DATA.nextInt();
-            System.out.println("Enter year: ");
+            System.out.println("\nEnter year: ");
             year = DATA.nextInt();
             c.set(year, month, date);
-            System.out.println("Enter hours: ");
+            System.out.println("\nEnter hours: ");
             hours = DATA.nextInt();
+            System.out.println("\nEnter minutes: ");
             minutes = DATA.nextInt();
+            System.out.println("\nBank Holiday (y/n)?");
+            keyboard = DATA.next();
+            DATA.nextLine();
+            if (keyboard.equals("y")) {
+                bankHoliday = true;
+            } else if (!keyboard.equals("n") && !keyboard.equals("y")) {
+                throw new WeeklyHoursDatabaseException("BankHoliday error");
+            }
+            
             if (hours <= 0 || hours > 24) {
                 throw new WeeklyHoursDatabaseException("Error hours");
             }
@@ -99,7 +176,6 @@ public class UserWorkSheet implements Component {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-
         if (minutes >= 30) {
             minutes = 30;
         } else {
@@ -114,7 +190,6 @@ public class UserWorkSheet implements Component {
         }
 
         LocalDate localDate = LocalDate.of(year, month, date);
-        System.out.println("DAY: " + localDate.getDayOfWeek());
         if ("SATURDAY".equals(localDate.getDayOfWeek().toString())) {
             saturday = true;
         } else if ("SUNDAY".equals(localDate.getDayOfWeek().toString())) {
@@ -125,12 +200,12 @@ public class UserWorkSheet implements Component {
 
     @Override
     public void updateComponent(int option) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void showComponent(int option) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
 }

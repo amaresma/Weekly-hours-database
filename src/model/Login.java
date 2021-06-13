@@ -19,7 +19,7 @@ public class Login implements Component {
 
     private String name;
     private String password;
-    private static List<UserWorkSheet> userWorkSheetList = new ArrayList();
+    private List<UserWorkSheet> userWorkSheetList = new ArrayList();
 
     /**
      * Constructor that creates a User
@@ -35,7 +35,15 @@ public class Login implements Component {
     public Login() {
 
     }
-
+    
+    public List<UserWorkSheet> getUserWorkSheet() {
+        return userWorkSheetList;
+    }
+    
+    public void setUserWorkSheet() {
+        
+    }
+    
     public String getName() {
         return name;
     }
@@ -62,14 +70,18 @@ public class Login implements Component {
 
     public void addUserWorkSheet(UserWorkSheet userWorkSheet) throws WeeklyHoursDatabaseException {
         if (userWorkSheet == null) {
-            userWorkSheet = UserWorkSheet.addWorkSheet();
+            userWorkSheet = UserWorkSheet.addWorkSheet();    
         }
         // Select component conditions needs to be done
         userWorkSheetList.add(userWorkSheet);
         for (int i = 0; i < userWorkSheetList.size(); i++) {
-            System.out.println(userWorkSheetList.get(i).getDay());
-            System.out.println(userWorkSheetList.get(i).getHours());
+            System.out.println("DAY: " + userWorkSheetList.get(i).getDay() 
+                    + " MONTH: "+userWorkSheetList.get(i).getMonth()  
+                    +" YEAR: " + userWorkSheetList.get(i).getYear()
+                    +" HOURS: " + userWorkSheetList.get(i).getHours()
+                    +" MINUTES: " + userWorkSheetList.get(i).getMinutes());
         }
+        
     }
 
     public static void deleteComponent(String user) {

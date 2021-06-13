@@ -1,24 +1,7 @@
-Sun Jun 13 11:44:39 CEST 2021 : Servidor de red Apache Derby: Se ha iniciado 10.10.2.0 - (1582446) y está listo para aceptar las conexiones en el puerto 1527
+Sun Jun 13 14:47:44 CEST 2021 : Servidor de red Apache Derby: Se ha iniciado 10.10.2.0 - (1582446) y está listo para aceptar las conexiones en el puerto 1527
 ----------------------------------------------------------------
-Sun Jun 13 11:44:40 CEST 2021:
- Iniciando instancia a816c00e-017a-04c2-4a7b-ffffcc118d24 de Derby, versión The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): 
-en el directorio de base de datos C:\Users\Albert\Documents\NetBeansProjects\WeeklyHoursDatabase\WeeklyHoursDatabase con el cargador de clases sun.misc.Launcher$AppClassLoader@1d44bcfa
-Cargado desde file:/C:/Program%20Files/Derby/db-derby-10.10.2.0-bin/lib/derby.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_281-b09
-user.dir=C:\Program Files\Derby\db-derby-10.10.2.0-bin
-os.name=Windows 10
-os.arch=amd64
-os.version=10.0
-derby.system.home=C:\Users\Albert\Documents\NetBeansProjects\WeeklyHoursDatabase
-Cargador de clases de base de datos iniciado - derby.database.classpath=''
-----------------------------------------------------------------
-Sun Jun 13 11:44:40 CEST 2021:
-Cerrando la instancia a816c00e-017a-04c2-4a7b-ffffcc118d24 en el directorio de base de datos C:\Users\Albert\Documents\NetBeansProjects\WeeklyHoursDatabase\WeeklyHoursDatabase con cargador de clases sun.misc.Launcher$AppClassLoader@1d44bcfa
-Sun Jun 13 11:44:40 CEST 2021 Thread[DRDAConnThread_3,5,main] (DATABASE = WeeklyHoursDatabase), (DRDAID = {2}), Cierre de la base de datos 'WeeklyHoursDatabase'.
-----------------------------------------------------------------
-Sun Jun 13 11:44:46 CEST 2021:
- Iniciando instancia 560740aa-017a-04c2-4a7b-ffffcc118d24 de Derby, versión The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): 
+Sun Jun 13 14:47:45 CEST 2021:
+ Iniciando instancia a816c00e-017a-0569-d712-ffffcc118d24 de Derby, versión The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): 
 en el directorio de base de datos C:\Users\Albert\Documents\NetBeansProjects\WeeklyHoursDatabase\WeeklyHoursDatabase con el cargador de clases sun.misc.Launcher$AppClassLoader@1d44bcfa
 Cargado desde file:/C:/Program%20Files/Derby/db-derby-10.10.2.0-bin/lib/derby.jar
 java.vendor=Oracle Corporation
