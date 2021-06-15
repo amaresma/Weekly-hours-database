@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import model.Login;
-import model.UserWorkSheet;
+import login.Admin;
+import login.User;
 import persistance.DB4OManager;
 import persistance.JDBCManager;
 
@@ -21,24 +21,24 @@ import persistance.JDBCManager;
 public class ConsoleApp {
 
     private final static Scanner DATA = new Scanner(System.in);
-    private static Login login;
-    private UserWorkSheet test;
+    private static User user;
+    private static Admin admin;
     static private DB4OManager db4oManager = new DB4OManager();
     static private JDBCManager jdbcManager = new JDBCManager();
     static private String db4oDatabase = "database.db4o";
     static private String jdbcDatabase = "";
-    private static List<Login> loginList = new ArrayList();
+    private static List<User> loginList = new ArrayList();
 
     public String getDB4O() {
         return db4oDatabase;
     }
 
-    public static List<Login> getLogin() {
+    public static List<User> getUser() {
         return loginList;
     }
 
-    public static void setLogin(Login login) {
-        loginList.add(login);
+    public static void setUser(User user) {
+        loginList.add(user);
     }
 
     public static void main(String args[]) throws WeeklyHoursDatabaseException {
@@ -83,7 +83,7 @@ public class ConsoleApp {
                     default:
                         for (int i = 0; i < loginList.size(); i++) {
                             if (loginList.get(i).getName().equals(name)) {
-                                login = loginList.get(i);
+                                user = loginList.get(i);
                             }
                         }
                         userMenu();
@@ -114,20 +114,20 @@ public class ConsoleApp {
                     break;
                 case 1: // ADD USER
                     boolean exists = false;
-                    login = login.addLogin();
+                    user = admin.addUser();
                     if (loginList.isEmpty()) {
-                        loginList.add(login);
-                        db4oManager.save(db4oDatabase, login.getName(), login, 1);
+                        loginList.add(user);
+                        db4oManager.save(db4oDatabase, user.getName(), user, 1);
                     } else {
                         for (int i = 0; i < loginList.size(); i++) {
-                            if (loginList.get(i).getName().equals(login.getName())) {
+                            if (loginList.get(i).getName().equals(user.getName())) {
                                 System.out.println("User already exists");
                                 exists = true;
                             }
                         }
                         if (!exists) {
-                            loginList.add(login);
-                            db4oManager.save(db4oDatabase, login.getName(), login, 1);
+                            loginList.add(user);
+                            db4oManager.save(db4oDatabase, user.getName(), user, 1);
                         }
                     }
                     break;
@@ -138,7 +138,6 @@ public class ConsoleApp {
                         if (loginList.get(i).getName().equals(userU)) {
                             loginList.get(i).updateComponent(1);
                             db4oManager.save(db4oDatabase, userU, loginList.get(i), 2);
-                            //login.updateComponent(1);
                         }
                     }
                     break;
@@ -187,7 +186,7 @@ public class ConsoleApp {
                     break;
                 case 1:
                     //add workday;
-                    login.addUserWorkSheet(null);
+                    user.addUserWorkSheet(null);
                     break;
                 case 2:
                     //update workday
@@ -198,11 +197,11 @@ public class ConsoleApp {
                     break;
                 case 4:
                     //show Workday
-                    for (int i = 0; i < login.getUserWorkSheet().size(); i++) {
-                        System.out.println("YEAR: " + login.getUserWorkSheet().get(i).getYear());
-                        System.out.println("MONTH: " + login.getUserWorkSheet().get(i).getMonth());
-                        System.out.println("DAY: " + login.getUserWorkSheet().get(i).getDay());
-                        System.out.println("MINUTES: " + login.getUserWorkSheet().get(i).getMinutes());
+                    for (int i = 0; i < user.getUserWorkSheet().size(); i++) {
+                        System.out.println("YEAR: " + user.getUserWorkSheet().get(i).getYear());
+                        System.out.println("MONTH: " + user.getUserWorkSheet().get(i).getMonth());
+                        System.out.println("DAY: " + user.getUserWorkSheet().get(i).getDay());
+                        System.out.println("MINUTES: " + user.getUserWorkSheet().get(i).getMinutes());
                     }
                     break;
                 default:

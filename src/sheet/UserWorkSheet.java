@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package sheet;
 
 import java.time.LocalDate;
 import java.util.Calendar;
+import login.Login;
 import main.Component;
 import main.WeeklyHoursDatabaseException;
 

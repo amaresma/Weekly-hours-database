@@ -12,3 +12,9 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\Albert\Documents\NetBeansProjects\WeeklyHoursDatabase
 Cargador de clases de base de datos iniciado - derby.database.classpath=''
+----------------------------------------------------------------
+Sun Jun 13 15:36:09 CEST 2021: cerrando motor de Derby
+----------------------------------------------------------------
+Sun Jun 13 15:36:09 CEST 2021:
+Cerrando la instancia a816c00e-017a-0569-d712-ffffcc118d24 en el directorio de base de datos C:\Users\Albert\Documents\NetBeansProjects\WeeklyHoursDatabase\WeeklyHoursDatabase con cargador de clases sun.misc.Launcher$AppClassLoader@1d44bcfa
+----------------------------------------------------------------

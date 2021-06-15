@@ -6,7 +6,7 @@
 package persistance;
 
 import main.WeeklyHoursDatabaseException;
-import model.Login;
+import login.Login;
 
 /**
  *

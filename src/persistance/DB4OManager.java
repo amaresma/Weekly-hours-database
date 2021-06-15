@@ -13,7 +13,8 @@ import com.db4o.query.Predicate;
 import java.util.List;
 import main.ConsoleApp;
 import main.WeeklyHoursDatabaseException;
-import model.Login;
+import login.Login;
+import login.User;
 
 /**
  *
@@ -22,19 +23,19 @@ import model.Login;
 public class DB4OManager implements PersistanceProvider {
 
     private ObjectContainer db;
-    private Login login;
+    private User user;
 
-    public Login getLogin() {
-        return login;
+    public Login getUser() {
+        return user;
     }
 
-    public void setLogin(Login login) {
-        this.login = login;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void startConnection() {
         EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
-        config.common().objectClass(Login.class).cascadeOnUpdate(true);
+        config.common().objectClass(User.class).cascadeOnUpdate(true);
         db = Db4oEmbedded.openFile("database.db4o");
     }
 
@@ -46,15 +47,15 @@ public class DB4OManager implements PersistanceProvider {
     public void save(String database, String item, Login pLogin, int option) throws WeeklyHoursDatabaseException {
         try {
             startConnection();
-            List<Login> logins = db.query(new Predicate<Login>() {
+            List<User> users = db.query(new Predicate<User>() {
                 @Override
-                public boolean match(Login loginQ) {
-                    return loginQ.getName().equals(item);
+                public boolean match(User userQ) {
+                    return userQ.getName().equals(item);
                 }
             });
             switch (option) {
                 case 1: // ADD User
-                    if (logins.isEmpty()) {
+                    if (users.isEmpty()) {
                         db.store(pLogin);
                         db.commit();
                     } else {
@@ -63,31 +64,31 @@ public class DB4OManager implements PersistanceProvider {
 
                     break;
                 case 2: // UPDATE Username
-                    if (!logins.isEmpty()) {
-                        login = logins.iterator().next();
-                        login.setName(pLogin.getName());
-                        login.setPassword(pLogin.getPassword());
-                        db.store(login);
+                    if (!users.isEmpty()) {
+                        user = users.iterator().next();
+                        user.setName(pLogin.getName());
+                        user.setPassword(pLogin.getPassword());
+                        db.store(user);
                         db.commit();
                     } else {
                         System.out.println("ERROR!");
                     }
                     break;
                 case 3: // UPDATE Password
-                    if (!logins.isEmpty()) {
-                        login = logins.iterator().next();
+                    if (!users.isEmpty()) {
+                        user = users.iterator().next();
                         //login.setName(pLogin.getName());
-                        login.setPassword(pLogin.getPassword());
-                        db.store(login);
+                        user.setPassword(pLogin.getPassword());
+                        db.store(user);
                         db.commit();
                     } else {
                         System.out.println("ERROR!!");
                     }
                     break;
                 case 4: // DELETE
-                    if (!logins.isEmpty()) {
-                        login = logins.iterator().next();
-                        db.delete(login);
+                    if (!users.isEmpty()) {
+                        user = users.iterator().next();
+                        db.delete(user);
                         db.commit();
                     } else {
                         System.out.println("ERROR!!!");
@@ -106,11 +107,11 @@ public class DB4OManager implements PersistanceProvider {
     public void load(String database) throws WeeklyHoursDatabaseException {
         try {
             startConnection();
-            Login test = new Login();
-            ObjectSet<Login> result = db.queryByExample(test);
+            User test = new User();
+            ObjectSet<User> result = db.queryByExample(test);
             while (result.hasNext()) {
-                Login input = result.next();
-                ConsoleApp.setLogin(input);
+                User input = result.next();
+                ConsoleApp.setUser(input);
             }
 
         } catch (Exception e) {
