@@ -12,6 +12,7 @@ import static main.Component.DATA;
  * @author Albert
  */
 public class Admin extends Login {
+    
 
     public static User addUser() {
         System.out.println("\nUsername: ");

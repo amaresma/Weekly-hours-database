@@ -11,6 +11,7 @@ import com.db4o.ObjectSet;
 import com.db4o.config.EmbeddedConfiguration;
 import com.db4o.query.Predicate;
 import java.util.List;
+import login.Admin;
 import main.ConsoleApp;
 import main.WeeklyHoursDatabaseException;
 import login.Login;
@@ -23,9 +24,14 @@ import login.User;
 public class DB4OManager implements PersistanceProvider {
 
     private ObjectContainer db;
+    private Admin admin;
     private User user;
+    
+    public Admin getAdmin() {
+        return admin;
+    }
 
-    public Login getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -107,13 +113,19 @@ public class DB4OManager implements PersistanceProvider {
     public void load(String database) throws WeeklyHoursDatabaseException {
         try {
             startConnection();
-            User test = new User();
-            ObjectSet<User> result = db.queryByExample(test);
-            while (result.hasNext()) {
-                User input = result.next();
-                ConsoleApp.setUser(input);
+            Admin adminL = new Admin();
+            ObjectSet<Admin> resultA = db.queryByExample(adminL);
+            while(resultA.hasNext()) {
+                Admin inputA = resultA.next();
+                
             }
-
+            
+            User userL = new User();
+            ObjectSet<User> resultU = db.queryByExample(userL);
+            while (resultU.hasNext()) {
+                User inputU = resultU.next();
+                ConsoleApp.setUser(inputU);
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("ERROR DB4O LOAD");

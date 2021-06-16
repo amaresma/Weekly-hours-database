@@ -5,18 +5,21 @@
  */
 package login;
 
+import java.util.ArrayList;
+import java.util.List;
 import main.Component;
 import main.ConsoleApp;
+import sheet.Work;
 
 /**
  *
  * @author Albert
  */
 public abstract class Login implements Component {
-
-    String name;
-    String password;
-   
+    
+    protected String name;
+    protected String password;
+    //protected List<Work> workList = new ArrayList();
 
     /**
      * Constructor that creates a User
@@ -49,7 +52,7 @@ public abstract class Login implements Component {
         this.password = password;
     }
 
-    public static void deleteComponent(String user) {
+    public static void deleteUser(String user) {
         for (int i = 0; i < ConsoleApp.getUser().size(); i++) {
             if (ConsoleApp.getUser().get(i).getName().equals(user)) {
                 ConsoleApp.getUser().remove(i);

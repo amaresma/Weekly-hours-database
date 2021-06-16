@@ -9,9 +9,9 @@ package sheet;
  *
  * @author Albert
  */
-public class Holiday extends Sheet {
+public class BankHoliday extends Sheet {
     
-    public Holiday(int day, int month, int year) {
+    public BankHoliday(int day, int month, int year) {
         super(day, month, year);
     }
     

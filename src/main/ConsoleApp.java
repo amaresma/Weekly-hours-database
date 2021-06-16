@@ -155,7 +155,7 @@ public class ConsoleApp {
                     for (int i = 0; i < loginList.size(); i++) {
                         if (loginList.get(i).getName().equals(userD)) {
                             db4oManager.save(db4oDatabase, userD, loginList.get(i), 4);
-                            loginList.get(i).deleteComponent(userD);
+                            loginList.get(i).deleteUser(userD);
                         }
                     }
                     break;
@@ -186,7 +186,7 @@ public class ConsoleApp {
                     break;
                 case 1:
                     //add workday;
-                    user.addUserWorkSheet(null);
+                    user.addWork(null);
                     break;
                 case 2:
                     //update workday
@@ -197,11 +197,11 @@ public class ConsoleApp {
                     break;
                 case 4:
                     //show Workday
-                    for (int i = 0; i < user.getUserWorkSheet().size(); i++) {
-                        System.out.println("YEAR: " + user.getUserWorkSheet().get(i).getYear());
-                        System.out.println("MONTH: " + user.getUserWorkSheet().get(i).getMonth());
-                        System.out.println("DAY: " + user.getUserWorkSheet().get(i).getDay());
-                        System.out.println("MINUTES: " + user.getUserWorkSheet().get(i).getMinutes());
+                    for (int i = 0; i < user.getWork().size(); i++) {
+                        System.out.println("YEAR: " + user.getWork().get(i).getYear());
+                        System.out.println("MONTH: " + user.getWork().get(i).getMonth());
+                        System.out.println("DAY: " + user.getWork().get(i).getDay());
+                        System.out.println("MINUTES: " + user.getWork().get(i).getNormalMinutes());
                     }
                     break;
                 default:
