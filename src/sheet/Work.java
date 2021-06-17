@@ -116,17 +116,19 @@ public class Work extends Sheet {
             }
         }
 
-        return new Work(day, month, year, normalHours, normalMinutes, extraHours, extraMinutes);
+        return new Work(day, month, year, normalHours, normalMinutes, 
+                extraHours, extraMinutes);
     }
 
-    @Override
-    public void updateComponent(int option) {
-
-    }
 
     @Override
     public void showComponent(int option) {
 
+    }
+
+    @Override
+    public void updateComponent(int option) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

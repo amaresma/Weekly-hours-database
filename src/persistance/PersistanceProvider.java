@@ -13,6 +13,6 @@ import login.Login;
  * @author Albert
  */
 public interface PersistanceProvider {
-    public void save (String database, String item, Login login, int option) throws WeeklyHoursDatabaseException;
+    public void save (String database, String item, int option) throws WeeklyHoursDatabaseException;
     public void load (String database) throws WeeklyHoursDatabaseException;
 }

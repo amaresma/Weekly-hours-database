@@ -33,8 +33,12 @@ public class ConsoleApp {
         return db4oDatabase;
     }
 
-    public static List<User> getUser() {
+    public static List<User> getList() {
         return loginList;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public static void setUser(User user) {
@@ -113,51 +117,19 @@ public class ConsoleApp {
                 case 0:
                     break;
                 case 1: // ADD USER
-                    boolean exists = false;
-                    user = admin.addUser();
-                    if (loginList.isEmpty()) {
-                        loginList.add(user);
-                        db4oManager.save(db4oDatabase, user.getName(), user, 1);
-                    } else {
-                        for (int i = 0; i < loginList.size(); i++) {
-                            if (loginList.get(i).getName().equals(user.getName())) {
-                                System.out.println("User already exists");
-                                exists = true;
-                            }
-                        }
-                        if (!exists) {
-                            loginList.add(user);
-                            db4oManager.save(db4oDatabase, user.getName(), user, 1);
-                        }
-                    }
+                    db4oManager.save(db4oDatabase, null, 1);
                     break;
                 case 2: // UPDATE USERNAME
-                    boolean save = false;
                     String userU = selectLogin(2);
-                    for (int i = 0; i < loginList.size(); i++) {
-                        if (loginList.get(i).getName().equals(userU)) {
-                            loginList.get(i).updateComponent(1);
-                            db4oManager.save(db4oDatabase, userU, loginList.get(i), 2);
-                        }
-                    }
+                    db4oManager.save(db4oDatabase, userU, 2);
                     break;
                 case 3: // UPDATE PASSWORD
                     String userP = selectLogin(2);
-                    for (int i = 0; i < loginList.size(); i++) {
-                        if (loginList.get(i).getName().equals(userP)) {
-                            loginList.get(i).updateComponent(2);
-                            db4oManager.save(db4oDatabase, userP, loginList.get(i), 3);
-                        }
-                    }
+                    db4oManager.save(db4oDatabase, userP, 3);
                     break;
                 case 4: // DELETE USERNAME
                     String userD = selectLogin(2);
-                    for (int i = 0; i < loginList.size(); i++) {
-                        if (loginList.get(i).getName().equals(userD)) {
-                            db4oManager.save(db4oDatabase, userD, loginList.get(i), 4);
-                            loginList.get(i).deleteUser(userD);
-                        }
-                    }
+                    db4oManager.save(db4oDatabase, userD, 4);
                     break;
                 case 5: // SHOW USERS
                     for (int i = 0; i < loginList.size(); i++) {

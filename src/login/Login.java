@@ -5,11 +5,8 @@
  */
 package login;
 
-import java.util.ArrayList;
-import java.util.List;
 import main.Component;
 import main.ConsoleApp;
-import sheet.Work;
 
 /**
  *
@@ -50,14 +47,6 @@ public abstract class Login implements Component {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public static void deleteUser(String user) {
-        for (int i = 0; i < ConsoleApp.getUser().size(); i++) {
-            if (ConsoleApp.getUser().get(i).getName().equals(user)) {
-                ConsoleApp.getUser().remove(i);
-            }
-        }
     }
 
     @Override
