@@ -8,6 +8,7 @@ package login;
 import java.util.ArrayList;
 import java.util.List;
 import main.WeeklyHoursDatabaseException;
+import persistance.JDBCManager;
 import sheet.Work;
 
 /**
@@ -16,6 +17,8 @@ import sheet.Work;
  */
 public class User extends Login {
 
+    private static JDBCManager jdbcManager = new JDBCManager();
+    private static String jdbcDatabase = "";
     private List<Work> workList = new ArrayList();
 
     public User(String name, String password) {

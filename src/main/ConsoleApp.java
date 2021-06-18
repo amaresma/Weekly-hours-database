@@ -12,7 +12,7 @@ import java.util.Scanner;
 import login.Admin;
 import login.User;
 import persistance.DB4OManager;
-import persistance.JDBCManager;
+import persistance.SERIALManager;
 
 /**
  *
@@ -22,13 +22,21 @@ public class ConsoleApp {
 
     private final static Scanner DATA = new Scanner(System.in);
     private static User user;
+    private static SERIALManager serialManager = new SERIALManager();
+    private static DB4OManager db4oManager = new DB4OManager();
+    private static String serialDatabase = "admin.ser";
+    private static String db4oDatabase = "users.db4o";
     private static Admin admin;
-    static private DB4OManager db4oManager = new DB4OManager();
-    static private JDBCManager jdbcManager = new JDBCManager();
-    static private String db4oDatabase = "database.db4o";
-    static private String jdbcDatabase = "";
     private static List<User> loginList = new ArrayList();
 
+    public Admin getAdmin() {
+        return admin;
+    }
+    
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+    
     public String getDB4O() {
         return db4oDatabase;
     }
@@ -49,7 +57,8 @@ public class ConsoleApp {
         int option = 0;
         do {
             try {
-                db4oManager.load(db4oDatabase);
+                serialManager.load(serialDatabase);
+                db4oManager.load(db4oDatabase); // LOAD USERS
                 System.out.println("\nSelect and option: ");
                 System.out.println("\n0. Exit");
                 System.out.println("\n1. Login");
@@ -192,6 +201,7 @@ public class ConsoleApp {
                 System.out.println("\nPassword: ");
                 String password = DATA.next();
                 DATA.nextLine();
+                
                 if (username.equals("admin") && password.equals("123")) {
                     return username;
                 } else {

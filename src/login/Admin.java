@@ -6,6 +6,7 @@
 package login;
 
 import static main.Component.DATA;
+import persistance.XMLManager;
 
 /**
  *
@@ -13,6 +14,17 @@ import static main.Component.DATA;
  */
 public class Admin extends Login {
     
+    private static XMLManager xmlManager = new XMLManager();
+    private static String xmlDatabase = "";
+    
+    private Admin(String admin, String password) {
+        super.name = admin;
+        super.password = password;
+    }
+    
+    public static Admin addAdmin() {
+        return new Admin("admin", "123");
+    }
 
     public static User addUser() {
         System.out.println("\nUsername: ");
@@ -21,5 +33,7 @@ public class Admin extends Login {
         String passwordSet = DATA.nextLine();
         return new User(nameSet, passwordSet);
     }
+
+    
 
 }

@@ -59,7 +59,7 @@ public class DB4OManager implements PersistanceProvider {
                     return userQ.getName().equals(item);
                 }
             });
-            System.out.println("LISTA: " + users.size());
+            
             switch (option) {
                 case 1:
                     boolean exists = false;
