@@ -35,20 +35,21 @@ public class SERIALManager implements PersistanceProvider {
         try {
             File adminFile = new File(database);
             adminFile.createNewFile();
+
             if (adminFile.list() == null) {
                 ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(adminFile));
                 admin = Admin.addAdmin();
-                //app.setAdmin(admin);
+                // app.setAdmin(admin);
                 oos.writeObject(admin);
+            } else {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(adminFile));
+                admin = (Admin) ois.readObject();
             }
-
         } catch (IOException ex) {
-            System.out.println("HELLO");
             throw new WeeklyHoursDatabaseException("charge");
-        } //catch (ClassNotFoundException ex) {
-            //System.out.println("HOLA");
-            //throw new WeeklyHoursDatabaseException("class");
-        //}
+        } catch (ClassNotFoundException ex) {
+            throw new WeeklyHoursDatabaseException("class");
+        }
 
     }
 

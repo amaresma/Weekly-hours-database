@@ -7,12 +7,13 @@ package login;
 
 import static main.Component.DATA;
 import persistance.XMLManager;
+import java.io.Serializable;
 
 /**
  *
  * @author Albert
  */
-public class Admin extends Login {
+public class Admin extends Login implements Serializable {
     
     private static XMLManager xmlManager = new XMLManager();
     private static String xmlDatabase = "";
