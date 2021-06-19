@@ -13,7 +13,7 @@ import java.io.Serializable;
  *
  * @author Albert
  */
-public class Admin extends Login implements Serializable {
+public class Admin extends Login {
     
     private static XMLManager xmlManager = new XMLManager();
     private static String xmlDatabase = "";

@@ -5,6 +5,7 @@
  */
 package login;
 
+import java.io.Serializable;
 import main.Component;
 import main.ConsoleApp;
 
@@ -12,7 +13,7 @@ import main.ConsoleApp;
  *
  * @author Albert
  */
-public abstract class Login implements Component {
+public abstract class Login implements Component, Serializable {
     
     protected String name;
     protected String password;

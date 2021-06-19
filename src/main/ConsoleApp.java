@@ -29,12 +29,12 @@ public class ConsoleApp {
     private static Admin admin;
     private static List<User> loginList = new ArrayList();
 
-    public Admin getAdmin() {
+    public static Admin getAdmin() {
         return admin;
     }
     
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
+    public static void setAdmin(Admin addAdmin) {
+        admin = addAdmin;
     }
     
     public String getDB4O() {
@@ -120,6 +120,7 @@ public class ConsoleApp {
             System.out.println("\n3. Update password");
             System.out.println("\n4. Delete user");
             System.out.println("\n5. Show users");
+            System.out.println("\n6. Update admin password");
             option = DATA.nextInt();
 
             switch (option) {
@@ -144,6 +145,9 @@ public class ConsoleApp {
                     for (int i = 0; i < loginList.size(); i++) {
                         loginList.get(i).showComponent(1);
                     }
+                    break;
+                case 6: // ADMIN PASSWORD
+                    serialManager.save(serialDatabase, admin.getPassword(), 1);
                     break;
                 default:
                     System.out.println("ADMIN MENU ERROR");
@@ -202,7 +206,7 @@ public class ConsoleApp {
                 String password = DATA.next();
                 DATA.nextLine();
                 
-                if (username.equals("admin") && password.equals("123")) {
+                if (username.equals("admin") && password.equals(admin.getPassword())) {
                     return username;
                 } else {
                     try {
