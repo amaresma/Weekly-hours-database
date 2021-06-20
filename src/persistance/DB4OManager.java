@@ -59,24 +59,10 @@ public class DB4OManager implements PersistanceProvider {
                     return userQ.getName().equals(item);
                 }
             });
-            
-            switch (option) {
+
+            switch (option) { // User selection
                 case 1:
-                    boolean exists = false;
                     user = Admin.addUser();
-                    if (ConsoleApp.getList().isEmpty()) {
-                        ConsoleApp.getList().add(user);
-                    } else {
-                        for (int i = 0; i < ConsoleApp.getList().size(); i++) {
-                            if (ConsoleApp.getList().get(i).equals(user.getName())) {
-                                System.out.println("User already exists");
-                                exists = true;
-                            }
-                        }
-                        if (!exists) {
-                            ConsoleApp.getList().add(user);
-                        }
-                    }
                     break;
                 case 2:
                 case 3:
@@ -88,49 +74,92 @@ public class DB4OManager implements PersistanceProvider {
                     }
                     break;
             }
+            boolean update = false;
+            User isAdmin = new User();
+            switch (option) { // User management
 
-            switch (option) {
-                case 1: // ADD User
-                    if (users.isEmpty()) {
-                        db.store(user);
-                        db.commit();
-                    } else {
-                        System.out.println("ERROR");
-                    }
-
-                    break;
                 case 2: // UPDATE Username
+                    update = true;
                     if (!users.isEmpty()) {
-                        user.updateComponent(1);
-                        userQuery = users.iterator().next();
-                        userQuery.setName(user.getName());
-                        userQuery.setPassword(userQuery.getPassword());
-                        db.store(userQuery);
-                        db.commit();
+                        isAdmin.updateComponent(1);
                     } else {
                         System.out.println("ERROR!");
                     }
                     break;
                 case 3: // UPDATE Password
-                    if (!users.isEmpty()) {
+                    if (!users.isEmpty()) {     
                         user.updateComponent(2);
-                        userQuery = users.iterator().next();
-                        userQuery.setPassword(user.getPassword());
-                        db.store(userQuery);
-                        db.commit();
                     } else {
                         System.out.println("ERROR!!");
                     }
                     break;
-                case 4: // DELETE
-                    if (!users.isEmpty()) {
-                        userQuery = users.iterator().next();
-                        db.delete(userQuery);
-                        db.commit();
-                        ConsoleApp.getList().remove(user);
-                    } else {
-                        System.out.println("ERROR!!!");
-                    }
+            }
+
+            if (!update && "admin".equals(user.getName())) {
+                System.out.println("\nAdmin user cannot be added.");
+            } else if (!update && "".equals(user.getName())) {
+                System.out.println("\nUser cannot be added.");
+            } else if (update && "admin".equals(isAdmin.getName())) {
+                System.out.println("\nAdmin user cannot be updated");
+            } else if (update && "".equals(isAdmin.getName())) {
+                System.out.println("\nUser cannot be updated.");
+            }  else {
+
+                switch (option) { // User storage
+                    case 1: // ADD User
+                        boolean exists = false;
+                        for (int i = 0; i < ConsoleApp.getList().size(); i++) {
+                            if (ConsoleApp.getList().get(i).getName().equals(user.getName())) {
+                                System.out.println("\nUser already exists");
+                                exists = true;
+                            }
+                        }
+                        if (!exists) {
+                            ConsoleApp.getList().add(user);
+                            if (users.isEmpty()) {
+                                db.store(user);
+                                db.commit();
+                            } else {
+                                System.out.println("ERROR");
+                            }
+                        }
+
+                        break;
+
+                    case 2: // UPDATE Username
+                        if (!users.isEmpty()) {
+                            System.out.println("PASA POR AQUI");
+                            user.setName(isAdmin.getName());
+                            userQuery = users.iterator().next();
+                            userQuery.setName(user.getName());
+                            userQuery.setPassword(userQuery.getPassword());
+                            db.store(userQuery);
+                            db.commit();
+                        } else {
+                            System.out.println("ERROR!");
+                        }
+                        break;
+                    case 3: // UPDATE Password
+                        if (!users.isEmpty()) { 
+                            userQuery = users.iterator().next();
+                            userQuery.setPassword(user.getPassword());
+                            db.store(userQuery);
+                            db.commit();
+                        } else {
+                            System.out.println("ERROR!!");
+                        }
+                        break;
+                    case 4: // DELETE
+                        if (!users.isEmpty()) {
+                            userQuery = users.iterator().next();
+                            db.delete(userQuery);
+                            db.commit();
+                            ConsoleApp.getList().remove(user);
+                        } else {
+                            System.out.println("ERROR!!!");
+                        }
+                }
+
             }
 
         } catch (Exception e) {

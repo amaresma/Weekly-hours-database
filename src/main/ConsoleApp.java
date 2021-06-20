@@ -32,11 +32,11 @@ public class ConsoleApp {
     public static Admin getAdmin() {
         return admin;
     }
-    
+
     public static void setAdmin(Admin addAdmin) {
         admin = addAdmin;
     }
-    
+
     public String getDB4O() {
         return db4oDatabase;
     }
@@ -70,7 +70,7 @@ public class ConsoleApp {
                         loginMenu();
                         break;
                     default:
-                        System.out.println("You need to select a correct option from the menu.");
+                        System.out.println("\nYou need to select a correct option from the menu.");
                         break;
                 }
             } catch (InputMismatchException e) {
@@ -86,7 +86,7 @@ public class ConsoleApp {
         try {
             String name = selectLogin(1);
             if (null == name) {
-                System.out.println("Wrong user");
+                System.out.println("\nWrong user");
             } else {
                 switch (name) {
                     case "admin":
@@ -142,8 +142,12 @@ public class ConsoleApp {
                     db4oManager.save(db4oDatabase, userD, 4);
                     break;
                 case 5: // SHOW USERS
-                    for (int i = 0; i < loginList.size(); i++) {
-                        loginList.get(i).showComponent(1);
+                    if (loginList.isEmpty()) {
+                        System.out.println("\nDatabase empty.");
+                    } else {
+                        for (int i = 0; i < loginList.size(); i++) {
+                            loginList.get(i).showComponent(1);
+                        }
                     }
                     break;
                 case 6: // ADMIN PASSWORD
@@ -205,7 +209,7 @@ public class ConsoleApp {
                 System.out.println("\nPassword: ");
                 String password = DATA.next();
                 DATA.nextLine();
-                
+
                 if (username.equals("admin") && password.equals(admin.getPassword())) {
                     return username;
                 } else {
