@@ -12,6 +12,7 @@ import java.util.Scanner;
 import login.Admin;
 import login.User;
 import persistance.DB4OManager;
+import persistance.JDBCManager;
 import persistance.SERIALManager;
 
 /**
@@ -24,6 +25,7 @@ public class ConsoleApp {
     private static User user;
     private static SERIALManager serialManager = new SERIALManager();
     private static DB4OManager db4oManager = new DB4OManager();
+    private static JDBCManager jdbcManager = new JDBCManager();
     private static String serialDatabase = "admin.ser";
     private static String db4oDatabase = "users.db4o";
     private static Admin admin;
@@ -45,7 +47,7 @@ public class ConsoleApp {
         return loginList;
     }
 
-    public User getUser() {
+    public static User getUser() {
         return user;
     }
 
@@ -57,8 +59,8 @@ public class ConsoleApp {
         int option = 0;
         do {
             try {
-                serialManager.load(serialDatabase);
-                db4oManager.load(db4oDatabase); // LOAD USERS
+                serialManager.load(serialDatabase, null,0);
+                db4oManager.load(db4oDatabase, null,0); // LOAD USERS
                 System.out.println("\nSelect and option: ");
                 System.out.println("\n0. Exit");
                 System.out.println("\n1. Login");
@@ -168,30 +170,34 @@ public class ConsoleApp {
             System.out.println("\n2. Update WorkDay");
             System.out.println("\n3. Delete WorkDay");
             System.out.println("\n4. Show WorkDay");
+            System.out.println("\n5. Add Holiday");
+            System.out.println("\n6. Update Holiday");
+            System.out.println("\n7. Delete Holiday");
+            System.out.println("\n8. Show Holiday");
             option = DATA.nextInt();
 
             switch (option) {
                 case 0:
                     break;
-                case 1:
-                    //add workday;
-                    user.addWork(null);
+                case 1: // ADD WORK
+                    jdbcManager.save(db4oDatabase, user.getName(), 1);
                     break;
-                case 2:
-                    //update workday
+                case 2: // UPDATE WORK
 
                     break;
-                case 3:
-                    //delete workday
+                case 3: // DELETE WORK
+
                     break;
-                case 4:
-                    //show Workday
-                    for (int i = 0; i < user.getWork().size(); i++) {
-                        System.out.println("YEAR: " + user.getWork().get(i).getYear());
-                        System.out.println("MONTH: " + user.getWork().get(i).getMonth());
-                        System.out.println("DAY: " + user.getWork().get(i).getDay());
-                        System.out.println("MINUTES: " + user.getWork().get(i).getNormalMinutes());
-                    }
+                case 4: // SHOW WORK
+                    jdbcManager.load(db4oDatabase, user.getName(), 1);
+                    break;
+                case 5: // ADD HOLIDAY
+                    break;
+                case 6: // UPDATE HOLIDAY
+                    break;
+                case 7: // DELETE HOLIDAY
+                    break;
+                case 8: // SHOW HOLIDAY
                     break;
                 default:
                     break;

@@ -171,7 +171,7 @@ public class DB4OManager implements PersistanceProvider {
     }
 
     @Override
-    public void load(String database) throws WeeklyHoursDatabaseException {
+    public void load(String database, String item, int option) throws WeeklyHoursDatabaseException {
         try {
             startConnection();
             User userL = new User();

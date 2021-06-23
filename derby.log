@@ -1,7 +1,7 @@
-Sun Jun 13 14:47:44 CEST 2021 : Servidor de red Apache Derby: Se ha iniciado 10.10.2.0 - (1582446) y está listo para aceptar las conexiones en el puerto 1527
+Wed Jun 23 08:40:58 CEST 2021 : Servidor de red Apache Derby: Se ha iniciado 10.10.2.0 - (1582446) y está listo para aceptar las conexiones en el puerto 1527
 ----------------------------------------------------------------
-Sun Jun 13 14:47:45 CEST 2021:
- Iniciando instancia a816c00e-017a-0569-d712-ffffcc118d24 de Derby, versión The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): 
+Wed Jun 23 08:40:58 CEST 2021:
+ Iniciando instancia a816c00e-017a-3799-a56c-ffffcc118d24 de Derby, versión The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): 
 en el directorio de base de datos C:\Users\Albert\Documents\NetBeansProjects\WeeklyHoursDatabase\WeeklyHoursDatabase con el cargador de clases sun.misc.Launcher$AppClassLoader@1d44bcfa
 Cargado desde file:/C:/Program%20Files/Derby/db-derby-10.10.2.0-bin/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -12,9 +12,3 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\Albert\Documents\NetBeansProjects\WeeklyHoursDatabase
 Cargador de clases de base de datos iniciado - derby.database.classpath=''
-----------------------------------------------------------------
-Sun Jun 13 15:36:09 CEST 2021: cerrando motor de Derby
-----------------------------------------------------------------
-Sun Jun 13 15:36:09 CEST 2021:
-Cerrando la instancia a816c00e-017a-0569-d712-ffffcc118d24 en el directorio de base de datos C:\Users\Albert\Documents\NetBeansProjects\WeeklyHoursDatabase\WeeklyHoursDatabase con cargador de clases sun.misc.Launcher$AppClassLoader@1d44bcfa
-----------------------------------------------------------------

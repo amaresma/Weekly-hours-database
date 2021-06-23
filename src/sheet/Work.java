@@ -16,13 +16,38 @@ public class Work extends Sheet {
 
     private int normalHours, normalMinutes, extraHours, extraMinutes;
 
-    public Work(int day, int month, int year, int normalHours, 
+    public Work(int day, int month, int year, int normalHours,
             int normalMinutes, int extraHours, int extraMinutes) {
         super(day, month, year);
         this.normalHours = normalHours;
         this.normalMinutes = normalMinutes;
         this.extraHours = extraHours;
         this.extraMinutes = extraMinutes;
+    }
+    
+    public Work(int month, int year) {
+        super(month, year);
+    }
+
+    /**
+     *
+     * @param month
+     * @param year
+     */
+
+    @Override
+    public int getDay() {
+        return day;
+    }
+
+    @Override
+    public int getMonth() {
+        return month;
+    }
+
+    @Override
+    public int getYear() {
+        return year;
     }
 
     public int getNormalHours() {
@@ -116,10 +141,18 @@ public class Work extends Sheet {
             }
         }
 
-        return new Work(day, month, year, normalHours, normalMinutes, 
+        return new Work(day, month, year, normalHours, normalMinutes,
                 extraHours, extraMinutes);
     }
 
+    public static Work selectWork() {
+        int month = 0, year = 0;
+        System.out.println(" \nEnter month: ");
+        month = DATA.nextInt();
+        System.out.println("\nEnter year: ");
+        year = DATA.nextInt();
+        return new Work(month, year);
+    }
 
     @Override
     public void showComponent(int option) {

@@ -67,6 +67,11 @@ public abstract class Sheet implements Component {
         this.year = year;
     }
     
+    public Sheet (int month, int year) {
+        this.month = month;
+        this.year = year;
+    }
+    
     
     public int getDay() {
         return day;

@@ -17,8 +17,7 @@ import sheet.Work;
  */
 public class User extends Login {
 
-    private static JDBCManager jdbcManager = new JDBCManager();
-    private static String jdbcDatabase = "";
+    //private static String jdbcDatabase = "";
     private List<Work> workList = new ArrayList();
 
     public User(String name, String password) {
@@ -36,22 +35,20 @@ public class User extends Login {
         this.workList = workList;
     }
 
-    public void addWork(Work work) throws WeeklyHoursDatabaseException {
+    public Work addWork(Work work) throws WeeklyHoursDatabaseException {
         if (work == null) {
             work = Work.addWork();
         } else {
             workList.add(work);
         }
-        // Select component conditions needs to be done
-        workList.add(work);
-        for (int i = 0; i < workList.size(); i++) {
-            System.out.println("DAY: " + workList.get(i).getDay()
-                    + " MONTH: " + workList.get(i).getMonth()
-                    + " YEAR: " + workList.get(i).getYear()
-                    + " HOURS: " + workList.get(i).getNormalHours()
-                    + " MINUTES: " + workList.get(i).getNormalMinutes());
-        }
-
+        return work;
+    }
+    
+    public Work selectWork(Work work) throws WeeklyHoursDatabaseException {
+        if (work == null) {
+            work = Work.selectWork();
+        }    
+        return work;
     }
 
 }

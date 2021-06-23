@@ -24,8 +24,8 @@ import main.WeeklyHoursDatabaseException;
  */
 public class SERIALManager implements PersistanceProvider {
 
-    ConsoleApp app;
-    Admin admin;
+    private ConsoleApp app;
+    private Admin admin;
 
     @Override
     public void save(String database, String item, int option) throws WeeklyHoursDatabaseException {
@@ -47,7 +47,7 @@ public class SERIALManager implements PersistanceProvider {
     }
 
     @Override
-    public void load(String database) throws WeeklyHoursDatabaseException {
+    public void load(String database, String item, int option) throws WeeklyHoursDatabaseException {
         
         ObjectOutputStream oos;
         ObjectInputStream ois;

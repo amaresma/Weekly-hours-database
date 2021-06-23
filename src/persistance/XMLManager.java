@@ -19,7 +19,7 @@ public class XMLManager implements PersistanceProvider {
     }
 
     @Override
-    public void load(String database) throws WeeklyHoursDatabaseException {
+    public void load(String database, String item, int option) throws WeeklyHoursDatabaseException {
         
     }
     

@@ -14,5 +14,5 @@ import login.Login;
  */
 public interface PersistanceProvider {
     public void save (String database, String item, int option) throws WeeklyHoursDatabaseException;
-    public void load (String database) throws WeeklyHoursDatabaseException;
+    public void load (String database, String item, int option) throws WeeklyHoursDatabaseException;
 }
