@@ -28,7 +28,7 @@ public class JDBCManager implements PersistanceProvider {
     private Admin admin;
     private User user = new User();
     private Work work;
-    
+
     String userName;
 
     private Connection conn;
@@ -40,13 +40,11 @@ public class JDBCManager implements PersistanceProvider {
     private PreparedStatement monthWorkSt;
     private static String insertWorkSQL = "INSERT INTO WORKSHEET(USERS,DAYS,MONTHS,YEARS,NORMALHOURS,NORMALMINUTES,EXTRAHOURS,EXTRAMINUTES)VALUES(?,?,?,?,?,?,?,?)";
     private PreparedStatement insertWorkSt;
-    private static String updateWorkSQL = "UPDATE WORKSHEET SET DAYS=?,MONTHS=?,YEARS=?,NORMALHOURS=?,NORMALMINUTES=?,EXTRAHOURS=?,EXTRAMINUTES=? WHERE USER=? AND DAYS=? AND MONTHS=? AND YEARS=?";
+    private static String updateWorkSQL = "UPDATE WORKSHEET SET DAYS=?,MONTHS=?,YEARS=?,NORMALHOURS=?,NORMALMINUTES=?,EXTRAHOURS=?,EXTRAMINUTES=? WHERE USERS=? AND DAYS=? AND MONTHS=? AND YEARS=?";
     private PreparedStatement updateWorkSt;
-    private static String deleteWorkSQL = "DELETE FROM WORKSHEET WHERE USER=? "
-            + "AND DAYS=? AND MONTHS=? AND YEARS=?";
+    private static String deleteWorkSQL = "DELETE FROM WORKSHEET WHERE USERS=? AND DAYS=? AND MONTHS=? AND YEARS=?";
     private PreparedStatement deleteWorkSt;
-    private static String holidaySQL = "SELECT * FROM HOLIDAYS WHERE USERS=? "
-            + "AND DAYS=? AND MONTHS=? AND YEARS=?";
+    private static String holidaySQL = "SELECT * FROM HOLIDAYS WHERE USERS=? AND DAYS=? AND MONTHS=? AND YEARS=?";
     private PreparedStatement holidaySt;
     private static String insertHolidaySQL = "INSERT INTO HOLIDAYS(USERS,DAYS,MONTHS,YEARS)VALUES(?,?,?,?)";
     private PreparedStatement insertHolidaySt;
@@ -102,8 +100,16 @@ public class JDBCManager implements PersistanceProvider {
                 extraMinutes = work.getExtraMinutes();
                 break;
             case 2: // UPDATE WORK variables
+                work = Work.selectDayMonthYear();
+                day = work.getDay();
+                month = work.getMonth();
+                year = work.getYear();
                 break;
             case 3: // DELETE WORK variables
+                work = user.deleteWork(null);
+                day = work.getDay();
+                month = work.getMonth();
+                year = work.getYear();
                 break;
             case 4: // ADD HOLIDAY variables
                 break;
@@ -152,9 +158,32 @@ public class JDBCManager implements PersistanceProvider {
                     }
                     break;
                 case 2: // UPDATE WORK
+                    if (resultSet.next()) {
+                        Work workMod = new Work();
+                        workMod = user.addWork(null);
+                        updateWorkSt.setInt(1, workMod.getDay());
+                        updateWorkSt.setInt(2, workMod.getMonth());
+                        updateWorkSt.setInt(3, workMod.getYear());
+                        updateWorkSt.setInt(4, workMod.getNormalHours());
+                        updateWorkSt.setInt(5, workMod.getNormalMinutes());
+                        updateWorkSt.setInt(6, workMod.getExtraHours());
+                        updateWorkSt.setInt(7, workMod.getExtraMinutes());
+                        updateWorkSt.setString(8, userName);
+                        updateWorkSt.setInt(9, day);
+                        updateWorkSt.setInt(10, month);
+                        updateWorkSt.setInt(11, year);
+                        updateWorkSt.executeUpdate();
+                    }
                     break;
                 case 3: // DELETE WORK
 
+                    if (resultSet.next()) {
+                        deleteWorkSt.setString(1, userName);
+                        deleteWorkSt.setInt(2, day);
+                        deleteWorkSt.setInt(3, month);
+                        deleteWorkSt.setInt(4, year);
+                        deleteWorkSt.executeUpdate();
+                    }
                     break;
                 case 4: // ADD HOLIDAY
                     break;

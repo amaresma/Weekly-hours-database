@@ -46,8 +46,15 @@ public class User extends Login {
     
     public Work selectWork(Work work) throws WeeklyHoursDatabaseException {
         if (work == null) {
-            work = Work.selectWork();
+            work = Work.selectMonthYear();
         }    
+        return work;
+    }
+    
+    public Work deleteWork (Work work) throws WeeklyHoursDatabaseException {
+        if (work == null) {
+            work = Work.selectDayMonthYear();
+        }
         return work;
     }
 

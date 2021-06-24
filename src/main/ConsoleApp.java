@@ -183,10 +183,10 @@ public class ConsoleApp {
                     jdbcManager.save(db4oDatabase, user.getName(), 1);
                     break;
                 case 2: // UPDATE WORK
-
+                    jdbcManager.save(db4oDatabase, user.getName(), 2);
                     break;
                 case 3: // DELETE WORK
-
+                    jdbcManager.save(db4oDatabase, user.getName(), 3);
                     break;
                 case 4: // SHOW WORK
                     jdbcManager.load(db4oDatabase, user.getName(), 1);

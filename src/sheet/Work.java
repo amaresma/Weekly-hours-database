@@ -24,9 +24,17 @@ public class Work extends Sheet {
         this.extraHours = extraHours;
         this.extraMinutes = extraMinutes;
     }
-    
+
     public Work(int month, int year) {
         super(month, year);
+    }
+    
+    public Work (int day, int month, int year) {
+        super(day, month, year);
+    }
+
+    public Work() {
+        
     }
 
     /**
@@ -34,7 +42,6 @@ public class Work extends Sheet {
      * @param month
      * @param year
      */
-
     @Override
     public int getDay() {
         return day;
@@ -145,14 +152,34 @@ public class Work extends Sheet {
                 extraHours, extraMinutes);
     }
 
-    public static Work selectWork() {
+    public static Work selectMonthYear() {
         int month = 0, year = 0;
-        System.out.println(" \nEnter month: ");
-        month = DATA.nextInt();
-        System.out.println("\nEnter year: ");
-        year = DATA.nextInt();
+        try {
+            System.out.println(" \nEnter month: ");
+            month = DATA.nextInt();
+            System.out.println("\nEnter year: ");
+            year = DATA.nextInt();
+
+        } catch (Exception ex) {
+        }
         return new Work(month, year);
     }
+
+    public static Work selectDayMonthYear() {
+        int day = 0, month = 0, year = 0;
+        try {
+            System.out.println("\nEnter day: ");
+            day = DATA.nextInt();
+            System.out.println("\nEnter month: ");
+            month = DATA.nextInt();
+            System.out.println("\nEnter year: ");
+            year = DATA.nextInt();
+            
+        } catch (Exception ex) {
+        }
+        return new Work(day, month, year);
+    }
+    
 
     @Override
     public void showComponent(int option) {
